@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.app.ProgressDialog;
 import android.os.Bundle;
 
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.rpaidapi_omdb.Listeners.OnMovieClickListener;
@@ -22,6 +23,7 @@ public class MainActivity extends AppCompatActivity implements OnMovieClickListe
     RequestManager manager;
     ProgressDialog dialog;
     HomeRecyclerAdapter adapter;
+    TextView  t;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
