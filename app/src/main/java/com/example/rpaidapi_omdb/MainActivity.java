@@ -23,7 +23,7 @@ public class MainActivity extends AppCompatActivity implements OnMovieClickListe
     RequestManager manager;
     ProgressDialog dialog;
     HomeRecyclerAdapter adapter;
-    TextView  t;
+    TextView  t,t2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
