@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
@@ -62,7 +63,10 @@ public class MovieDetailsActivity extends AppCompatActivity {
         details_container = findViewById(R.id.details_container);
         manager = new RequestManager(this);
 
-        String id = getIntent().getStringExtra("movie_id");
+        String id = getIntent().getStringExtra("data");
+
+        Log.d("Movie id", "onCreate: "+id);
+
 
         dialog = new ProgressDialog(this);
         dialog.setTitle("Please Wait");
@@ -71,7 +75,7 @@ public class MovieDetailsActivity extends AppCompatActivity {
 
         RequestManager manager = new RequestManager(this);
         //  manager.getMovieDetails(listener, id);
-        showResult((MovieResult) getIntent().getSerializableExtra("details"));
+       showResult((MovieResult) getIntent().getSerializableExtra("details"));
         manager.searchMovieRating(listener,id);
 
 
@@ -100,7 +104,7 @@ public class MovieDetailsActivity extends AppCompatActivity {
     };
 
     private void showRating(MovieRatings ratings) {
-        textView_movie_detail_rating.setText(String.valueOf(ratings.getRating()));
+        textView_movie_detail_rating.setText("Rating: "+String.valueOf(ratings.getRating()));
         textView_movie_detail_votes.setText(String.valueOf(ratings.getRatingsHistograms().get("IMDb Staff").getTotalRatings() )+ " IMDB");
 
 
@@ -109,7 +113,7 @@ public class MovieDetailsActivity extends AppCompatActivity {
     private void showResult(MovieResult response) {
         textView_movie_detail_name.setText(response.getTitle());
         textView_movie_detail_year.setText("Year Released: " + response.getYear());
-        textView_movie_detail_length.setText("Duration: " + response.getRunningTimeInMinutes());
+        textView_movie_detail_length.setText("Duration: " + response.getRunningTimeInMinutes()+ " minutes");
 
 //        textView_movie_detail_plot.setText(response.getPlot());
 

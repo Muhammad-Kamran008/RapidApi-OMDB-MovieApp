@@ -1,6 +1,8 @@
 package com.example.rpaidapi_omdb.Model;
 
-public class Role {
+import java.io.Serializable;
+
+public class Role implements Serializable {
     private String character="";
     private String characterId="";
 

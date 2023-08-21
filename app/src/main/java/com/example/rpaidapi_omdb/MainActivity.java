@@ -90,12 +90,14 @@ public class MainActivity extends AppCompatActivity implements OnMovieClickListe
     @Override
     public void onMovieClicked(String id) {
         MovieResult newMovieResult = null;
-        Toast.makeText(this, id, Toast.LENGTH_SHORT).show();
+
         for (MovieResult mr : movieResults) {
             if (mr.getId().equals(id)) {
                 newMovieResult = mr;
             }
         }
+        id = id.replace("/title/", "").replace("/", "");
+        Toast.makeText(this, id, Toast.LENGTH_SHORT).show();
         Log.d("movie", "onMovieClicked: "+newMovieResult.getTitle());
         startActivity(new Intent(MainActivity.this, MovieDetailsActivity.class).putExtra("data", id).putExtra("details",newMovieResult));
 

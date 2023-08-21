@@ -88,23 +88,13 @@ public class RequestManager {
         );
     }
 
-//    public interface getMovieDetails{
-//        @Headers({
-//                "Accept: application/json",
-//                "x-rapidapi-host: imdb-internet-movie-database-unofficial.p.rapidapi.com",
-//                "x-rapidapi-key: 6054e549d9msh369d2b1b1b20035p1d56e4jsn51d524553189"
-//        })
-//        @GET("film/{movie_id}")
-//        Call<MovieResult> callMovieDetails(
-//                @Path("movie_id") String movie_id
-//        );
-//    }
+
 
     public interface getMovieRating {
         @Headers({
                 "Accept: application/json",
-                "x-rapidapi-host: imdb-internet-movie-database-unofficial.p.rapidapi.com",
-                "x-rapidapi-key: 6054e549d9msh369d2b1b1b20035p1d56e4jsn51d524553189"
+                "X-RapidAPI-Host: online-movie-database.p.rapidapi.com",
+                "X-RapidAPI-Key: 64c6729453msh2b0343ebc9e0fdap12ce19jsn2fb910702d24"
         })
         @GET("title/get-ratings")
         Call<MovieRatings> callMovieRating(
