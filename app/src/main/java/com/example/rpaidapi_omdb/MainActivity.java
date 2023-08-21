@@ -9,13 +9,18 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 
+import android.util.Log;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.rpaidapi_omdb.Listeners.OnMovieClickListener;
 import com.example.rpaidapi_omdb.Listeners.OnSearchApiListener;
+import com.example.rpaidapi_omdb.Model.MovieResult;
 import com.example.rpaidapi_omdb.Model.SearchResult;
 import com.example.rpaidapi_omdb.ui.HomeRecyclerAdapter;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements OnMovieClickListener {
 
@@ -24,6 +29,8 @@ public class MainActivity extends AppCompatActivity implements OnMovieClickListe
     RequestManager manager;
     ProgressDialog dialog;
     HomeRecyclerAdapter adapter;
+
+    List<MovieResult> movieResults;
 
 
     @Override
@@ -59,6 +66,7 @@ public class MainActivity extends AppCompatActivity implements OnMovieClickListe
                 Toast.makeText(MainActivity.this, "No data found", Toast.LENGTH_SHORT).show();
                 return;
             }
+            movieResults = searchResult.getResults();
             showResult(searchResult);
         }
 
@@ -81,8 +89,17 @@ public class MainActivity extends AppCompatActivity implements OnMovieClickListe
 
     @Override
     public void onMovieClicked(String id) {
+        MovieResult newMovieResult = null;
         Toast.makeText(this, id, Toast.LENGTH_SHORT).show();
-startActivity(new Intent(MainActivity.this,MovieDetailsActivity.class));
+        for (MovieResult mr : movieResults) {
+            if (mr.getId().equals(id)) {
+                newMovieResult = mr;
+            }
+        }
+        Log.d("movie", "onMovieClicked: "+newMovieResult.getTitle());
+        startActivity(new Intent(MainActivity.this, MovieDetailsActivity.class).putExtra("data", id).putExtra("details",newMovieResult));
+
 
     }
 }
+

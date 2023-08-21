@@ -1,8 +1,9 @@
 package com.example.rpaidapi_omdb.Model;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class MovieResult {
+public class MovieResult implements Serializable {
     private String id="";
     private Image image=null;
     private int runningTimeInMinutes=1;

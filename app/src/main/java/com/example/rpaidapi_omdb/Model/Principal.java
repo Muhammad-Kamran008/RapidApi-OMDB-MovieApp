@@ -1,8 +1,9 @@
 package com.example.rpaidapi_omdb.Model;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class Principal {
+public class Principal implements Serializable {
     private String id="";
     private String legacyNameText="";
     private String name="";

@@ -4,7 +4,11 @@ import android.app.appsearch.AppSearchManager;
 import android.content.Context;
 import android.widget.Toast;
 
+import com.example.rpaidapi_omdb.Listeners.OnFetchDetailListener;
+import com.example.rpaidapi_omdb.Listeners.OnRatingsApiListener;
 import com.example.rpaidapi_omdb.Listeners.OnSearchApiListener;
+import com.example.rpaidapi_omdb.Model.MovieRatings;
+import com.example.rpaidapi_omdb.Model.MovieResult;
 import com.example.rpaidapi_omdb.Model.SearchResult;
 
 import retrofit2.Call;
@@ -47,6 +51,30 @@ public class RequestManager {
 
     }
 
+    public void searchMovieRating(OnRatingsApiListener listener, String movie_id) {
+        getMovieRating getMovieRating = retrofit.create(RequestManager.getMovieRating.class);
+
+        Call<MovieRatings> call= getMovieRating.callMovieRating(movie_id);
+        call.enqueue(new Callback<MovieRatings>() {
+            @Override
+            public void onResponse(Call<MovieRatings> call, Response<MovieRatings> response) {
+                if (!response.isSuccessful()) {
+                    Toast.makeText(context, "Could not fetch data", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                listener.onResponse(response.body());
+
+            }
+
+            @Override
+            public void onFailure(Call<MovieRatings> call, Throwable t) {
+                listener.onError(t.getMessage());
+
+            }
+        });
+
+    }
+
 
     public interface getMovies {
         @Headers({
@@ -59,5 +87,30 @@ public class RequestManager {
                 @Query("q") String movie_name
         );
     }
+
+//    public interface getMovieDetails{
+//        @Headers({
+//                "Accept: application/json",
+//                "x-rapidapi-host: imdb-internet-movie-database-unofficial.p.rapidapi.com",
+//                "x-rapidapi-key: 6054e549d9msh369d2b1b1b20035p1d56e4jsn51d524553189"
+//        })
+//        @GET("film/{movie_id}")
+//        Call<MovieResult> callMovieDetails(
+//                @Path("movie_id") String movie_id
+//        );
+//    }
+
+    public interface getMovieRating {
+        @Headers({
+                "Accept: application/json",
+                "x-rapidapi-host: imdb-internet-movie-database-unofficial.p.rapidapi.com",
+                "x-rapidapi-key: 6054e549d9msh369d2b1b1b20035p1d56e4jsn51d524553189"
+        })
+        @GET("title/get-ratings")
+        Call<MovieRatings> callMovieRating(
+                @Query("tconst") String movie_id
+        );
+    }
+
 
 }
