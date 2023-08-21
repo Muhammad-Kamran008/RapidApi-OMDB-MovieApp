@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 
 import android.widget.TextView;
@@ -23,7 +24,7 @@ public class MainActivity extends AppCompatActivity implements OnMovieClickListe
     RequestManager manager;
     ProgressDialog dialog;
     HomeRecyclerAdapter adapter;
-    TextView  t,t2;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,6 +82,7 @@ public class MainActivity extends AppCompatActivity implements OnMovieClickListe
     @Override
     public void onMovieClicked(String id) {
         Toast.makeText(this, id, Toast.LENGTH_SHORT).show();
+startActivity(new Intent(MainActivity.this,MovieDetailsActivity.class));
 
     }
 }

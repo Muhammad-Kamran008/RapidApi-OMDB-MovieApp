@@ -45,6 +45,13 @@ public class HomeRecyclerAdapter extends RecyclerView.Adapter<HomeViewHolder> {
             Picasso.get().load(list.get(position).getImage().getUrl()).into(holder.imageView_poster);
 
         }
+
+        holder.home_container.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                listener.onMovieClicked(list.get(position).getId());
+            }
+        });
     }
 
     @Override
